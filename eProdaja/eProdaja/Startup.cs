@@ -32,6 +32,10 @@ namespace eProdaja
             services.AddSwaggerGen();
             services.AddScoped<IProizvodService, ProizvodService>();
             services.AddScoped<IKorisniciService, KorisniciService>();
+            services.AddScoped<IJediniceMjereService, JediniceMjereService>();
+            services.AddScoped<IVrsteProizvodaService, VrsteProizvodaService>();
+            services.AddScoped<IProizvodiService, ProizvodiService>();
+
             services.AddAutoMapper(typeof(Startup));
 
             services.AddDbContext<eProdajaContext>(options =>
