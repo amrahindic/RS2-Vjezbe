@@ -1,8 +1,10 @@
+using eProdaja.Database;
 using eProdaja.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,6 +31,17 @@ namespace eProdaja
             services.AddControllers();
             services.AddSwaggerGen();
             services.AddScoped<IProizvodService, ProizvodService>();
+            services.AddScoped<IKorisniciService, KorisniciService>();
+            services.AddScoped<IJediniceMjereService, JediniceMjereService>();
+            services.AddScoped<IVrsteProizvodaService, VrsteProizvodaService>();
+            services.AddScoped<IProizvodiService, ProizvodiService>();
+
+            services.AddAutoMapper(typeof(Startup));
+
+            services.AddDbContext<eProdajaContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+         
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
